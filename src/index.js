@@ -1,3 +1,3 @@
-import DateTimePickerModal from "./DateTimePickerModal";
+import PickerModal from "./PickerModal";
 
-export default DateTimePickerModal;
+export default PickerModal;

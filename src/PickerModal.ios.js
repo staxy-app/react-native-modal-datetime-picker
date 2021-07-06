@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import Modal from "./Modal";
 import { isIphoneX } from "./utils";
 
@@ -20,7 +19,7 @@ const deprecatedPropsInfo = [
   { prop: "titleIOS", newProp: "headerTextIOS" },
   { prop: "customTitleContainerIOS", newProp: "customHeaderIOS" },
   { prop: "onHideAfterConfirm", newProp: "onHide" },
-  { prop: "customDatePickerIOS", newProp: "customPickerIOS" }
+  { prop: "customDatePickerIOS", newProp: "customPickerIOS" },
 ];
 
 const unsopportedPropsInfo = [
@@ -31,7 +30,7 @@ const unsopportedPropsInfo = [
   { prop: "hideTitleContainerIOS" },
   { prop: "neverDisableConfirmIOS" },
   { prop: "pickerRefCb" },
-  { prop: "reactNativeModalPropsIOS" }
+  { prop: "reactNativeModalPropsIOS" },
 ];
 
 export default class PickerModal extends React.PureComponent {
@@ -52,7 +51,7 @@ export default class PickerModal extends React.PureComponent {
     onCancel: PropTypes.func.isRequired,
     onConfirm: PropTypes.func.isRequired,
     onChange: PropTypes.func,
-    onHide: PropTypes.func
+    onHide: PropTypes.func,
   };
 
   static defaultProps = {
@@ -61,28 +60,28 @@ export default class PickerModal extends React.PureComponent {
     headerTextIOS: "Pick a value",
     isDarkModeEnabled: false,
     isVisible: false,
-    pickerContainerStyleIOS: {}
+    pickerContainerStyleIOS: {},
   };
 
   state = {
     currentValue: this.props.value,
     isPickerVisible: this.props.isVisible,
-    isPickerSpinning: false
+    isPickerSpinning: false,
   };
 
   didPressConfirm = false;
 
   componentDidMount() {
-    Object.keys(this.props).forEach(prop => {
+    Object.keys(this.props).forEach((prop) => {
       // Show a warning if a deprecated prop is being used
-      const deprecationInfo = deprecatedPropsInfo.find(x => x.prop === prop);
+      const deprecationInfo = deprecatedPropsInfo.find((x) => x.prop === prop);
       if (deprecationInfo) {
         console.warn(
           `react-native-modal-datetime-picker: The "${deprecationInfo.prop}" prop is deprecated. Please use the ${deprecationInfo.newProp} prop instead.`
         );
       }
       // Show a warning if a prop that is not supported anymore is being used
-      const unsopportInfo = unsopportedPropsInfo.find(x => x.prop === prop);
+      const unsopportInfo = unsopportedPropsInfo.find((x) => x.prop === prop);
       if (unsopportInfo) {
         console.warn(
           `react-native-modal-datetime-picker: The "${unsopportInfo.prop}" prop is not supported anymore.`
@@ -112,7 +111,7 @@ export default class PickerModal extends React.PureComponent {
     // Deprecated
     const {
       onModalHide, // Deprecated
-      onHide
+      onHide,
     } = this.props;
     if (onModalHide) {
       onModalHide(this.didPressConfirm, this.state.currentValue);
@@ -122,7 +121,7 @@ export default class PickerModal extends React.PureComponent {
     this.setState({ isPickerVisible: false });
   };
 
-  handleValueChange = value => {
+  handleValueChange = (value) => {
     if (this.props.onValueChange) {
       this.props.onValueChange(value);
     }
@@ -180,7 +179,7 @@ export default class PickerModal extends React.PureComponent {
           style={[
             pickerStyles.container,
             themedContainerStyle,
-            pickerContainerStyleIOS
+            pickerContainerStyleIOS,
           ]}
         >
           <HeaderComponent label={titleIOS || headerTextIOS} />
@@ -210,19 +209,19 @@ export default class PickerModal extends React.PureComponent {
 const pickerStyles = StyleSheet.create({
   modal: {
     justifyContent: "flex-end",
-    margin: 10
+    margin: 10,
   },
   container: {
     borderRadius: BORDER_RADIUS,
     marginBottom: 8,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   containerLight: {
-    backgroundColor: BACKGROUND_COLOR_LIGHT
+    backgroundColor: BACKGROUND_COLOR_LIGHT,
   },
   containerDark: {
-    backgroundColor: BACKGROUND_COLOR_DARK
-  }
+    backgroundColor: BACKGROUND_COLOR_DARK,
+  },
 });
 
 export const Header = ({ label }) => {
@@ -238,13 +237,13 @@ const headerStyles = StyleSheet.create({
     borderBottomColor: BORDER_COLOR,
     borderBottomWidth: StyleSheet.hairlineWidth,
     padding: 14,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   text: {
     textAlign: "center",
     color: TITLE_COLOR,
-    fontSize: TITLE_FONT_SIZE
-  }
+    fontSize: TITLE_FONT_SIZE,
+  },
 });
 
 export const ConfirmButton = ({ isDisabled, onPress, label }) => {
@@ -266,15 +265,15 @@ const confirmButtonStyles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     backgroundColor: "transparent",
     height: 57,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   text: {
     textAlign: "center",
     color: BUTTON_FONT_COLOR,
     fontSize: BUTTON_FONT_SIZE,
     fontWeight: BUTTON_FONT_WEIGHT,
-    backgroundColor: "transparent"
-  }
+    backgroundColor: "transparent",
+  },
 });
 
 export const CancelButton = ({ isDarkModeEnabled, onPress, label }) => {
@@ -297,13 +296,13 @@ const cancelButtonStyles = StyleSheet.create({
     borderRadius: BORDER_RADIUS,
     height: 57,
     marginBottom: isIphoneX() ? 20 : 0,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   buttonLight: {
-    backgroundColor: BACKGROUND_COLOR_LIGHT
+    backgroundColor: BACKGROUND_COLOR_LIGHT,
   },
   buttonDark: {
-    backgroundColor: BACKGROUND_COLOR_DARK
+    backgroundColor: BACKGROUND_COLOR_DARK,
   },
   text: {
     padding: 10,
@@ -311,6 +310,6 @@ const cancelButtonStyles = StyleSheet.create({
     color: BUTTON_FONT_COLOR,
     fontSize: BUTTON_FONT_SIZE,
     fontWeight: "600",
-    backgroundColor: "transparent"
-  }
+    backgroundColor: "transparent",
+  },
 });
