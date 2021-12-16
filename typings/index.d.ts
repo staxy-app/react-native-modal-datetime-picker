@@ -59,7 +59,7 @@ interface PickerModalProps {
    */
   isVisible?: boolean;
 
-  PickerComponent: React.ComponentType;
+  PickerComponent: React.ComponentType<any>;
 
   pickerContainerStyleIOS: any;
 
