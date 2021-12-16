@@ -65,7 +65,7 @@ interface PickerModalProps {
 
   PickerComponent: React.ComponentType<any>;
 
-  pickerContainerStyleIOS: any;
+  pickerContainerStyleIOS?: any;
 
   /**
    * Title text for the Picker on iOS
@@ -78,15 +78,15 @@ interface PickerModalProps {
    * Handler called when the user presses the confirm button
    * Passes the current selected date
    */
-  onConfirm(date: Date): void;
+  onConfirm(value: any): void;
 
   /**
    * Handler called when the user presses the cancel button
    * Passes the current selected date
    */
-  onCancel(date: Date): void;
+  onCancel(): void;
 
-  onChange(value: any);
+  onChange?(value: any): void;
 
   /**
    * Called when the underlying modal finishes its' closing animation
