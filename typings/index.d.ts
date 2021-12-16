@@ -45,6 +45,8 @@ interface PickerModalProps {
 
   value: any;
 
+  items: Array<any>;
+
   modalStyleIOS?: any;
 
   /**
