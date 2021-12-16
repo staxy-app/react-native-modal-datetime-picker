@@ -43,6 +43,8 @@ interface PickerModalProps {
    */
   customPickerIOS?: React.ComponentType;
 
+  value: any;
+
   modalStyleIOS?: any;
 
   /**
