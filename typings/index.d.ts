@@ -8,7 +8,7 @@
 import * as React from "react";
 import { ViewStyle, TextStyle } from "react-native";
 
-interface DateTimePickerProps {
+interface PickerModalProps {
   /**
    * The text on the cancel button on iOS
    *
@@ -34,28 +34,6 @@ interface DateTimePickerProps {
   customConfirmButtonIOS?: React.ComponentType;
 
   /**
-   * A custom component for the confirm button on iOS that will be shown while user interacting with the date picker
-   *
-   * Doesn't work without customConfirmButtonIOS
-   */
-  customConfirmButtonWhileInteractingIOS?: JSX.Element;
-
-  /**
-   * The style of the ReactNativeModal container on iOS
-   */
-  contentContainerStyleIOS?: ViewStyle;
-
-  /**
-   * The style of the cancel button container on iOS
-   */
-  cancelButtonContainerStyleIOS?: ViewStyle;
-
-  /**
-   * A custom style for the titleIOS (Default is 'Pick a Date')
-   */
-  titleStyle?: TextStyle;
-
-  /**
    * A custom component for the title container on iOS
    */
   customHeaderIOS?: React.ComponentType;
@@ -65,22 +43,7 @@ interface DateTimePickerProps {
    */
   customPickerIOS?: React.ComponentType;
 
-  /**
-   * The style of the container on iOS
-   */
-  datePickerContainerStyleIOS?: ViewStyle;
-
-  /**
-   * Initial selected date/time
-   *
-   * Default is a date object from `new Date()`
-   */
-  date?: Date;
-
-  /**
-   * The date picker locale.
-   */
-  locale?: string;
+  modalStyleIOS?: any;
 
   /**
    * Toggles the dark mode style of the picker
@@ -96,32 +59,9 @@ interface DateTimePickerProps {
    */
   isVisible?: boolean;
 
-  /**
-   * Sets mode to 24 hour time
-   * If false, the picker shows an AM/PM chooser on Android
-   *
-   * Default is true
-   */
-  is24Hour?: boolean;
+  PickerComponent: React.ComponentType;
 
-  /**
-   *  The mode of the picker
-   *
-   * Available modes are:
-   *  date - Shows Datepicker
-   *  time - Shows Timepicker
-   *  datetime - Shows a combined Date and Time Picker
-   *
-   * Default is 'date'
-   */
-  mode?: "date" | "time" | "datetime";
-
-  /**
-   * Toggles the time mode on Android between spinner and clock views
-   *
-   * Default is 'default' which shows either spinner or clock based on Android version
-   */
-  timePickerModeAndroid?: "spinner" | "clock" | "default";
+  pickerContainerStyleIOS: any;
 
   /**
    * Title text for the Picker on iOS
@@ -129,42 +69,6 @@ interface DateTimePickerProps {
    * Default is 'Pick a Date'
    */
   headerTextIOS?: string;
-
-  /**
-   * Minimum date the picker can go back to
-   */
-  minimumDate?: Date;
-
-  /**
-   * Maximum date the picker can go forward to
-   */
-  maximumDate?: Date;
-
-  /**
-   *  enum(1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30)
-   *  The interval at which minutes can be selected.
-   *
-   * @extends from DatePickerIOSProperties
-   */
-  minuteInterval?: number;
-
-  /**
-   * Timezone offset in minutes.
-   * By default, the date picker will use the device's timezone. With this parameter, it is possible to force a certain timezone offset.
-   * For instance, to show times in Pacific Standard Time, pass -7 * 60.
-   *
-   * @extends from DatePickerIOSProperties
-   */
-  timeZoneOffsetInMinutes?: number;
-
-  /**
-   * Date change handler.
-   * This is called when the user changes the date or time in the UI.
-   * The first and only argument is a Date object representing the new date and time.
-   *
-   * @extends from DatePickerIOSProperties
-   */
-  onDateChange?(newDate: Date): void;
 
   /**
    * Handler called when the user presses the confirm button
@@ -178,6 +82,8 @@ interface DateTimePickerProps {
    */
   onCancel(date: Date): void;
 
+  onChange(value: any);
+
   /**
    * Called when the underlying modal finishes its' closing animation
    * after Confirm was pressed.
@@ -185,7 +91,7 @@ interface DateTimePickerProps {
   onHide?(date: Date): void;
 }
 
-export default class DateTimePicker extends React.Component<
-  DateTimePickerProps,
+export default class PickerModal extends React.Component<
+  PickerModalProps,
   any
-  > { }
+> {}
